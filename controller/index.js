@@ -1,4 +1,4 @@
-	
+
 	var guid = require('guid');
 	var moment = require('moment');
 	var jwt = require('jsonwebtoken');
@@ -25,16 +25,14 @@
 			usuario: params //será substituído pela resposta do banco de dados
 		};
 
-		res.send(response);
+	res.send(response);
 	};
 
 	controller.retornarUsuario = function (req, res) {
-
 	};
 
 	// Nao esquecer de atualizar usuario quando realizr login
 	controller.signIn = function (req, res) {
-
 	};
 
-	module.exports = controller;
+	module.exports = controller;	
