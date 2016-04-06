@@ -1,3 +1,4 @@
+	//TO DO: Atualizar o sublime para aceitar caracteres unicode
 
 	var guid = require('guid');
 	var moment = require('moment');
