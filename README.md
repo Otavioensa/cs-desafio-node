@@ -1,0 +1,1 @@
+API criada com o propósito de atender aos requisitos do desafio proposto pela Concrete Solutions.
