@@ -14,11 +14,11 @@ app.use('/', routes);
 
 // lida com requisições inválidas
 app.use(function(req, res) {
-	res.status(404).json({
-		mensagem: 'Recurso não existente'
-	});
+  res.status(404).json({
+    mensagem: 'Recurso não existente'
+  });
 });
 
 app.listen(process.env.PORT || 3000, function () {
-	console.log('Server no ar');
+  console.log('Server no ar');
 });
