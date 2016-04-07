@@ -19,7 +19,7 @@
 		var response = {
 			_id: guid.create(),
 			data_criacao: moment().format('YYYY-MM-DD'),
-			data_atualizacao: moment().format('YYYY-MM-DD'), // data quando atualizr - fizer login ?
+			data_atualizacao: moment().format('YYYY-MM-DD'), // data quando atualizar - fizer login ?
 			ultimo_login: moment().format('YYYY-MM-DD'),
 			token: token,
 			usuario: params //será substituído pela resposta do banco de dados
