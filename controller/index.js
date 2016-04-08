@@ -1,4 +1,5 @@
-//TO DO: Atualizar o sublime para aceitar caracteres unicode
+//TO DO: Criar arquivo que conterá mensagens, afim de nao
+// mante-las no código 
 
   var guid = require('guid');
   var moment = require('moment');
@@ -19,10 +20,10 @@
       telefones: req.body.telefones
     };
 
-    model.cadastrarUsuario(params, function (err, result) {    	
+    model.cadastrarUsuario(params, function (err, result) {     
       
       if (err) {
-      	res.status(422).json({ mensagem: 'Houve um problema ao inserir no banco de dados' });
+        res.status(422).json({ mensagem: 'Problema ao inserir no banco de dados' });
       } else {
         
         var response = {          
@@ -40,26 +41,24 @@
 
   controller.retornarUsuario = function (req, res) {
     
-  	try {
-  		var decoded = jwt.verify(req.headers.token, 'shhhhh');
-		} catch(err) {
-		  return res.status(401).json({ mensagem: 'Não autorizado' });
-		}
+    try {
+      var decoded = jwt.verify(req.headers.token, 'shhhhh');
+    } catch(err) {
+      return res.status(401).json({ mensagem: 'Não autorizado' });
+    }
 
     var params = {
-    	'_id': req.params.id
+      '_id': req.params.id
     };
 
-    model.retornarUsuario(params, function (err, result) {    	
+    model.retornarUsuario(params, function (err, result) {      
 
       if (err) {
-      	var mensagem = 'Houve um problema ao inserir no banco de dados';
-      	res.status(422).json({ mensagem: mensagem });
+        res.status(422).json({ mensagem: 'Problema ao inserir no banco de dados' });
       } else if (result[0].token !== req.headers.token) {
-      	var mensagem = 'Não autorizado';
-      	res.status(401).json({ mensagem: mensagem });
+        res.status(401).json({ mensagem: 'Não autorizado' });
       } else {
-      	res.json(result);
+        res.json(result);
       }
 
     });
@@ -68,8 +67,6 @@
 
   // Nao esquecer de atualizar usuario quando realizr login
   controller.signIn = function (req, res) {
-
-
   };
 
-  module.exports = controller;	
+  module.exports = controller;  
