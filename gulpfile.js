@@ -1,8 +1,6 @@
 
   /*
   * TO DO: Implementar task para realizar build
-  * FIX ME: Ajustar para listar todos os files e não apenas os que 
-  * estão na raiz
   */
 
   var gulp = require('gulp');
@@ -11,7 +9,7 @@
   var concat = require('gulp-concat');
   var rename = require('gulp-rename');
   var files = ['./*.js', 'controller/*.js', 'db/*.js', 
-    'model/*.js', 'route/*.js'];
+    'model/*.js', 'route/*.js', 'validation/*.js'];
 
   gulp.task('lint', function () {
 
