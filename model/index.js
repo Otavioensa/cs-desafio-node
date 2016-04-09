@@ -10,8 +10,8 @@
     db.collection('concrete_solutions_document').find(params, callback);  	
   };
 
-  model.atualizarUsuario = function (params, usuario, callback) {
-  	db.collection('concrete_solutions_document').update(params, usuario, callback);
+  model.signIn = function (params, callback) {
+  	db.collection('concrete_solutions_document').findAndModify(params, callback);
   };
 
   module.exports = model;

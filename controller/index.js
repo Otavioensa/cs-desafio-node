@@ -1,7 +1,9 @@
-//TO DO: Criar arquivo que conterá mensagens, afim de nao
-// mante-las no código 
 
-  var async = require('async');
+  /*
+    * TO DO: Criar arquivo que conterá mensagens, afim de nao
+    * mante-las no código 
+  */
+
   var guid = require('guid');
   var moment = require('moment');
   var jwt = require('jsonwebtoken');
@@ -30,23 +32,28 @@
         var response = {          
           usuario: result,
           data_criacao: moment().format('YYYY-MM-DD'),
-          data_atualizacao: moment().format('YYYY-MM-DD'), // quando fizer login
-          ultimo_login: moment().format('YYYY-MM-DD') // quando fizer login
+          data_atualizacao: moment().format('YYYY-MM-DD'),
+          ultimo_login: moment().format('YYYY-MM-DD')
         };
 
         res.json(response);
       }
-
     });
+
   };
 
-  // TO DO: implementar verificação de token expirado
   controller.retornarUsuario = function (req, res) {
-    
+
     try {
       var decoded = jwt.verify(req.token, 'shhhhh');
     } catch(err) {
-      return res.status(401).json({ mensagem: 'Não autorizado' });
+
+      if (err.name === 'TokenExpiredError') {
+        return res.status(401).json({ mensagem: 'Sessão inválida' });
+      } else {
+        return res.status(401).json({ mensagem: 'Não autorizado' });
+      }
+
     }
 
     var params = {
@@ -67,61 +74,43 @@
 
   };
 
-  // TO DO: Atualizar usuario quando realizar login
-  // TO DO: implementar token que expire
   // TO DO: Ajustar status code
   controller.signIn = function (req, res) {
 
-    var self = this;
+    //1800 segundos = 30 minutos
+    var token = jwt.sign({ foo: 'bar' }, 'shhhhh', {expiresInSeconds: 1800});
+    
     var params = {
-      $and: [
-        { 'email': req.body.email },
-        { 'senha': req.body.senha }
-      ]
-    };
-
-    self.atualizarUsuario = function (result, callback) {
-
-    };
-
-    async.waterfall([
-
-      function (callback) {
-        model.retornarUsuario(params, callback);
+      
+      query: {
+        $and: [
+          { 'email': req.body.email },
+          { 'senha': req.body.senha }
+        ]
+      },
+      
+      update: { 
+        $set: { 
+          ultimo_login: moment().format('YYYY-MM-DD'),
+          data_atualizacao: moment().format('YYYY-MM-DD'),
+          token: token
+        } 
       },
 
-      function (result, callback) {
-        if (result.length < 1)
-          callback({ statusErro: 422, mensagem: 'Usuário e/ou senha inválidos' })
-        else
-          self.atualizarUsuario(result, callback);
-      }
+      new: true    
+    };
 
-    ], 
-    function (err, result) {
-
-      console.log(err)
-      console.log(result)
-
-    });
-
-
-
-
-    /*model.retornarUsuario(params, function (err, result) {      
+    model.signIn(params, function (err, result, lastErrorObject) {      
 
       if (err) {
-        res.status(422).json({ mensagem: 'Erro ao realizar login' });
-      } else if (result.length < 1) {
-        res.status(422).json({ mensagem: 'Usuário e/ou senha inválidos' });
+        res.status(503).json({ mensagem: 'Erro ao fazer login.' });
+      } else if (lastErrorObject.n < 1){
+        res.status(422).json({mensagem: 'Usuário e/ou senha inválidos'});
       } else {
-        res.json(result);
-      }
+        res.json({ sigIn: true });
+      }    
 
-
-    });*/
-    
-    
+    }); 
 
   };
 
