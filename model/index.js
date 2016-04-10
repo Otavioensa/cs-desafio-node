@@ -11,7 +11,7 @@
   };
 
   model.signIn = function (params, callback) {
-  	db.collection('concrete_solutions_document').findAndModify(params, callback);
+    db.collection('concrete_solutions_document').findAndModify(params, callback);
   };
 
   module.exports = model;

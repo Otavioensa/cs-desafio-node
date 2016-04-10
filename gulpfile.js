@@ -1,8 +1,4 @@
 
-  /*
-  * TO DO: Implementar task para realizar build
-  */
-
   var gulp = require('gulp');
   var jshint = require('gulp-jshint');
   var uglify = require('gulp-uglify');
@@ -34,7 +30,7 @@
     gulp.run('lint', 'dist');
 
     gulp.watch(files, function() {
-	    gulp.run('lint', 'dist');
+      gulp.run('lint', 'dist');
     });
 
   });

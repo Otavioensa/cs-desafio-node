@@ -1,9 +1,4 @@
 
-  /*
-    * TO DO: Criar arquivo que conterá mensagens, afim de nao
-    * mante-las no código 
-  */
-
   var guid = require('guid');
   var moment = require('moment');
   var jwt = require('jsonwebtoken');
@@ -26,7 +21,7 @@
     model.cadastrarUsuario(params, function (err, result) {     
       
       if (err) {
-        res.status(422).json({ mensagem: 'E-mail já existente.' });
+        res.status(401).json({ mensagem: 'E-mail já existente.' });
       } else {
         
         var response = {          
@@ -63,7 +58,7 @@
     model.retornarUsuario(params, function (err, result) {      
 
       if (err) {
-        res.status(422).json({ mensagem: 'Problema ao inserir no banco de dados' });
+        res.status(500).json({ mensagem: 'Problema ao inserir no banco de dados' });
       } else if (result[0].token !== req.token) {
         res.status(401).json({ mensagem: 'Não autorizado' });
       } else {
@@ -74,7 +69,6 @@
 
   };
 
-  // TO DO: Ajustar status code
   controller.signIn = function (req, res) {
 
     //1800 segundos = 30 minutos
@@ -103,11 +97,11 @@
     model.signIn(params, function (err, result, lastErrorObject) {      
 
       if (err) {
-        res.status(503).json({ mensagem: 'Erro ao fazer login.' });
+        res.status(500).json({ sigIn: false, mensagem: 'Erro ao fazer login.' });
       } else if (lastErrorObject.n < 1){
-        res.status(422).json({mensagem: 'Usuário e/ou senha inválidos'});
+        res.status(401).json({ sigIn: false, mensagem: 'Usuário e/ou senha inválidos'});
       } else {
-        res.json({ sigIn: true });
+        res.json({ sigIn: true, token: token });
       }    
 
     }); 

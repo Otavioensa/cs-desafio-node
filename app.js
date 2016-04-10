@@ -18,9 +18,9 @@
   app.use(validator());
 
   // valida parametros passados na requisição
-	app.post('/usuario', validation.cadastrarUsuario);
-	app.get('/usuario/:id', validation.retornarUsuario);
-	app.put('/signIn', validation.signIn);
+  app.post('/usuario', validation.cadastrarUsuario);
+  app.get('/usuario/:id', validation.retornarUsuario);
+  app.put('/signIn', validation.signIn);
 
   // lida com o roteamento de requisições
   app.use('/', routes); 
