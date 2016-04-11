@@ -62,7 +62,7 @@
       } else if (result[0].token !== req.token) {
         res.status(401).json({ mensagem: 'Não autorizado' });
       } else {
-        res.json(result);
+        res.json(result[0]);
       }
 
     });
