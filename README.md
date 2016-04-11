@@ -82,6 +82,7 @@ API responsável por recuperar usuário previamente cadastrado. Para realizar a 
 Header (Exemplo):
 
 Authorization 
+
 Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE0NjAzNDM2OTEsImV4cCI6MTQ2MDM0NTQ5MX0.zdDcMRhYUjrYD95YviXKcy2jPgmbKWo2Ipc9Jh5uMLk
 
 Request (Exemplo):
