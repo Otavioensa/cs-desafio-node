@@ -4,7 +4,8 @@ Endpoints:
 
 Criação de Cadastro
 
-POST
+POST:
+
 https://cs-desafio-node-otavioensa.c9users.io/usuario
 
 API responsável pelo cadastro de usuários.
@@ -42,10 +43,11 @@ Response:
     "data_atualizacao": "2016-04-11",
     "ultimo_login": "2016-04-11"
 }
-
+______________________________________________________________________________________________________________________________________
 SigIn
 
-PUT
+PUT:
+
 https://cs-desafio-node-otavioensa.c9users.io/signIn
 
 API responsável por realizar o login. Irá gerar um token com validade de 30 minutos em caso de sucesso no login. 
@@ -66,6 +68,26 @@ Response (Exemplo):
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE0NjAzNDM2OTEsImV4cCI6MTQ2MDM0NTQ5MX0.zdDcMRhYUjrYD95YviXKcy2jPgmbKWo2Ipc9Jh5uMLk"
 }
 
+______________________________________________________________________________________________________________________________________
+
+
+Buscar Usuário
+
+GET:
+
+https://cs-desafio-node-otavioensa.c9users.io/usuario/:idUsuario
+
+API responsável por recuperar usuário previamente cadastrado. Para realizar a consulta, deverá informar o token no Header (Authorization), token gerado previamente no login/cadastro.
+
+Header (Exemplo):
+
+Authorization 
+Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmb28iOiJiYXIiLCJpYXQiOjE0NjAzNDM2OTEsImV4cCI6MTQ2MDM0NTQ5MX0.zdDcMRhYUjrYD95YviXKcy2jPgmbKWo2Ipc9Jh5uMLk
+
+Request (Exemplo):
+https://cs-desafio-node-otavioensa.c9users.io/usuario/348d373a-a561-a4df-ff51-0829fddc3ec6
+
+Response (Exemplo):
 {
     "_id": "348d373a-a561-a4df-ff51-0829fddc3ec6",
     "nome": "usuario",
@@ -81,6 +103,7 @@ Response (Exemplo):
     "ultimo_login": "2016-04-11",
     "data_atualizacao": "2016-04-11"
 }
+
 
 
 
