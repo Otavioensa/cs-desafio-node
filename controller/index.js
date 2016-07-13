@@ -7,7 +7,7 @@
 
   controller.cadastrarUsuario = function (req, res) {
 
-    var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+    var token = jwt.sign({ email: req.body.email }, 'shhhhh');
 
     var params = {
       _id: String(guid.create()),
@@ -72,7 +72,7 @@
   controller.signIn = function (req, res) {
 
     //1800 segundos = 30 minutos
-    var token = jwt.sign({ foo: 'bar' }, 'shhhhh', {expiresInSeconds: 1800});
+    var token = jwt.sign({ email: req.body.email }, 'shhhhh', {expiresInSeconds: 1800});
     
     var params = {
       
